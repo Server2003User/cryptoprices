@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CryptoPrices</title>
+  <style>
+    /* Reset default margin */
+    body {
+      margin: 0;
+    }
+
+    /* Center the Frame1 div */
+    .Frame1 {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background: linear-gradient(30deg, rgba(23, 23, 23, 1) 0%, rgba(34, 34, 34, 1) 100%, rgba(57, 57, 57, 1) 100%);
+    }
+
+    /* Styles for the inner content */
+    .CreatedByServer2003userDataFromCoincapApi {
+      color: rgba(255, 255, 255, 0.30);
+      font-size: 10px;
+      font-family: 'IBM Plex Mono', monospace;
+      font-weight: 500;
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      bottom: 10px;
+    }
+
+    .DivIdk {
+      position: absolute;
+      width: 355px;
+      height: 800px;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    .DivRectangle1 {
+      width: 355px;
+      height: 550px;
+      position: absolute;
+      background: rgba(0, 0, 0, 0.25);
+      box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25) inset;
+      top: 15%;
+    }
+
+    .ButtonContainer {
+      width: 280px; /* Adjust width to fit the buttons */
+      height: 500px; /* Adjust height for scrolling */
+      overflow-y: auto; /* Enable vertical scrolling */
+      overflow-x: hidden;
+      position: absolute;
+      left: 10%;
+      top: 18%;
+    }
+
+    .ButtonSelector {
+      width: 280px;
+      height: 51px;
+      position: relative;
+      background: rgba(30, 30, 30, 0.25);
+      box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+      border-radius: 3px;
+      margin-bottom: 10px; /* Adjust spacing between buttons */
+      cursor: pointer;
+    }
+    
+    .ButtonSelector:hover {
+      width: 280px;
+      height: 51px;
+      position: relative;
+      background: rgba(30, 30, 30, 0.25);
+      box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25) inset;
+      border-radius: 3px;
+      margin-bottom: 10px; /* Adjust spacing between buttons */
+      cursor: pointer;
+    }
+
+    .Choice {
+      width: 280px;
+      position: absolute;
+      top: 50%;
+      left: 12px;
+      transform: translateY(-50%);
+      color: white;
+      font-size: 20px;
+      font-family: 'IBM Plex Mono', monospace;
+      font-weight: 400;
+      word-wrap: break-word;
+    }
+  </style>
+</head>
+<body>
+  <div class="Frame1">
+    <div class="CreatedByServer2003userDataFromCoincapApi">Created by server2003user | Data from CoinCap API</div>
+    <div class="DivIdk">
+      <div class="DivRectangle1"></div>
+      <div class="ButtonContainer" id="ButtonContainer">
+        <!-- Dynamically generated buttons will be placed here -->
+      </div>
+    </div>
+    <div class="DivButtonback" style="width: 144px; height: 31px; left: 428px; top: 652px; position: absolute" onclick="window.location='frame1.html';">
+      <div class="Back" style="width: 48.35px; height: 27px; left: 8px; top: 2px; position: absolute; color: white; font-size: 20px; font-family: IBM Plex Mono; font-weight: 400; word-wrap: break-word">Back</div>
+      <div class="DivRectangle1" style="width: 144px; height: 31px; left: 0px; top: 0px; position: absolute; background: rgba(255, 255, 255, 0.30); box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25); border-radius: 3px"></div>
+      </div>
+  </div>
+
+  <script>
+    // JavaScript code for dynamically generating buttons goes here
+    fetch('https://api.coincap.io/v2/assets/')
+      .then(response => response.json())
+      .then(data => {
+        const dataData = data.data;
+        const buttonContainer = document.getElementById('ButtonContainer');
+
+        for (let i = 0; i < dataData.length; i++) {
+          const clonedButton = document.createElement('div');
+          clonedButton.classList.add('ButtonSelector');
+
+          const choiceElement = document.createElement('div');
+          choiceElement.classList.add('Choice');
+          choiceElement.innerText = dataData[i].name;
+
+          // Click event listener for each button
+          clonedButton.addEventListener('click', function() {
+            let clicked = dataData[i].id;
+            console.log(clicked);
+            let jsonclicked = JSON.stringify(clicked);
+            sessionStorage.setItem("ID", jsonclicked);
+            let serverurlid = sessionStorage.getItem("ID");
+            if (serverurlid != null) {
+              window.location.href = 'frame5.html';
+            }
+          });
+
+          clonedButton.appendChild(choiceElement);
+          buttonContainer.appendChild(clonedButton);
+        }
+      })
+      .catch(error => {
+        console.error('Error:', error);
+      });
+  </script>
+</body>
+</html>
