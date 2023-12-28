@@ -27,3 +27,9 @@ Search Page
 - Server2003User - Main Developer
 - CoinCap API - Price and Data information
 - TradingView - Graphs
+
+**NOTE**
+
+Please don't use this project seriously. It was simply made for me to learn HTML and a bit of JS and should not be tooken for any professional purpose. I believe it to be a nifty tool for personal use but I would not rely on it for anything serious. Maybe in the future I will come back and make it better than in the current place it is in now. Until then, keep an eye on it.
+
+- Server2003User
